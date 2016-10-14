@@ -29,7 +29,7 @@ import org.springframework.web.context.WebApplicationContext;
         @ContextConfiguration(name = "parent", classes = AppConfig.class),
         @ContextConfiguration(name = "child", classes = DBConfig.class)
 })
-public class StudentControllerTest{
+public class StudentControllerTest {
 
 
     @Autowired
@@ -41,7 +41,7 @@ public class StudentControllerTest{
     private MockMvc mockMvc;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
         MockitoAnnotations.initMocks(this);
     }

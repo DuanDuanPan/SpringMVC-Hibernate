@@ -21,4 +21,9 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     protected String[] getServletMappings() {
         return new String[]{"*.tdm"};
     }
+
+    @Override
+    protected String getServletName() {
+        return "springMVCServlet";
+    }
 }
