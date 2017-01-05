@@ -3,6 +3,8 @@ package com.cssrc.controller;
 import com.cssrc.entity.StudentEntity;
 import com.cssrc.service.IStudentService;
 import com.cssrc.util.CommonAjaxResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,12 +20,15 @@ import java.util.List;
 @RequestMapping("student")
 public class StudentController {
 
+    private final static Logger logger = LoggerFactory.getLogger(StudentController.class);
+
     @Autowired
     IStudentService studentService;
 
     @RequestMapping("list")
     @ResponseBody
     public CommonAjaxResponse<List<StudentEntity>> getAllStudents(){
+        logger.error("request complete success");
         return new CommonAjaxResponse<>("请求成功",true,studentService.getAllStudents());
     }
 
