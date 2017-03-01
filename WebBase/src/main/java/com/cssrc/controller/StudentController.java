@@ -6,17 +6,12 @@ import com.cssrc.util.CommonAjaxResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.Date;
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Administrator on 2016/10/10 0010.
  */
-@Controller
+@RestController
 @RequestMapping("student")
 public class StudentController {
 
@@ -25,22 +20,27 @@ public class StudentController {
     @Autowired
     IStudentService studentService;
 
-    @RequestMapping("list")
+    @RequestMapping(value = "/{student}", method = RequestMethod.GET)
     @ResponseBody
-    public CommonAjaxResponse<List<StudentEntity>> getAllStudents(){
-        logger.error("request complete success");
-        return new CommonAjaxResponse<>("请求成功",true,studentService.getAllStudents());
+    public CommonAjaxResponse<StudentEntity> getStudent(@PathVariable Long student) {
+        StudentEntity studentEntity = studentService.getById(student);
+        return new CommonAjaxResponse<>("请求成功", true, studentEntity);
     }
 
-    @RequestMapping("saveStudent")
+    @RequestMapping(value = "/{student}", method = RequestMethod.DELETE)
     @ResponseBody
-    public CommonAjaxResponse<StudentEntity> saveStudent(){
+    public CommonAjaxResponse<Boolean> deleteStudent(@PathVariable Long student) {
+        studentService.delete(student);
+        return new CommonAjaxResponse<>("success", true, true);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    @ResponseBody
+    public CommonAjaxResponse<StudentEntity> saveStudent() {
         StudentEntity studentEntity = new StudentEntity();
-        studentEntity.setAge(0l);
-        studentEntity.setBirth(new Date());
         studentEntity.setName("潘端端");
+        studentEntity.setAge(29l);
         studentService.saveStudent(studentEntity);
-        return new CommonAjaxResponse<>("请求成功",true,studentEntity);
+        return new CommonAjaxResponse<>("success", true, studentEntity);
     }
-
 }

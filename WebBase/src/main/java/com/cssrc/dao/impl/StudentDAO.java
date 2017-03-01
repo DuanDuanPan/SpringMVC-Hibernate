@@ -14,18 +14,29 @@ import java.util.List;
  */
 @Repository
 @Transactional
-public class StudentDAO implements IStudentDAO{
+public class StudentDAO implements IStudentDAO {
 
     @Autowired
     HibernateTemplate hibernateTemplate;
 
     public List<StudentEntity> getAllStudents() {
         String hql = "FROM StudentEntity";
-        return (List<StudentEntity>)hibernateTemplate.find(hql);
+        return (List<StudentEntity>) hibernateTemplate.find(hql);
     }
 
     public Boolean saveStudent(StudentEntity studentEntity) {
         hibernateTemplate.save(studentEntity);
         return true;
+    }
+
+    @Override
+    public StudentEntity getById(Long student) {
+        return hibernateTemplate.get(StudentEntity.class, student);
+    }
+
+    @Override
+    public void delete(Long student) {
+        StudentEntity studentEntity = hibernateTemplate.get(StudentEntity.class, student);
+        hibernateTemplate.delete(studentEntity);
     }
 }

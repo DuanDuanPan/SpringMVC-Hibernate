@@ -24,4 +24,14 @@ public class StudentService implements IStudentService{
     public Boolean saveStudent(StudentEntity studentEntity) {
         return studentDAO.saveStudent(studentEntity);
     }
+
+    @Override
+    public StudentEntity getById(Long student) {
+        return studentDAO.getById(student);
+    }
+
+    @Override
+    public void delete(Long student) {
+        studentDAO.delete(student);
+    }
 }

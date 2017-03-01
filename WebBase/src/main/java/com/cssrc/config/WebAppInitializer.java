@@ -19,7 +19,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"*.tdm"};
+        return new String[]{"/"};
     }
 
     @Override

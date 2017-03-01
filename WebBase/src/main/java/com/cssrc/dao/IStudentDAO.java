@@ -11,4 +11,8 @@ public interface IStudentDAO {
 
     List<StudentEntity> getAllStudents();
     Boolean saveStudent(StudentEntity studentEntity);
+
+    StudentEntity getById(Long student);
+
+    void delete(Long student);
 }
